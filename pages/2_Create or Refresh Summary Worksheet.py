@@ -15,9 +15,9 @@ from shapely.geometry import Point
 
 st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
-currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
+# currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
 
-speciesFile = currentDir + 'NWspecies220522.xlsx'
+speciesFile = 'NWspecies220522.xlsx'
 
 #Create page title
 titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
@@ -53,7 +53,7 @@ def create_summary_data():
     def getSpeciesTable():
         '''Load the species table from the Neighburwoods repo'''
 
-        speciesFile = currentDir + 'NWspecies220522.xlsx'
+        # speciesFile = currentDir + 'NWspecies220522.xlsx'
 
         speciesTable = pd.read_excel(speciesFile,sheet_name = "species")
 
@@ -272,11 +272,12 @@ def create_summary_data():
             '''Determines the name of the ecodistrict that the average latitude and average longitude are in.  This is used
             to determine native vs non-native based on ecodistricts and Little's tree species range maps.'''
                 
-            currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
+            # currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
             
             # import the geopackage with the map (geometries) of all Ecodistricts'''
                 
-            ecodistricts = gpd.read_file(currentDir + "OntarioEcodistricts.gpkg")
+            # ecodistricts = gpd.read_file(currentDir + "OntarioEcodistricts.gpkg")
+            ecodistricts = gpd.read_file("OntarioEcodistricts.gpkg")
             
             #create a point with avLon and avLat from session_state
             avLat = df_trees['latitude'].mean()
