@@ -11,13 +11,16 @@ title = 'new_nw_header.png'
 
 titleCol2.image(title, use_column_width=True)
 
-# st.markdown("___")
+st.markdown("___")
 
-# screen1 = st.empty()
-# screen2 = st.empty()
+screen1 = st.empty()
+
+st.markdown("___")
+
+screen2 = st.empty()
 # screen3 = st.empty()
 
-# st.markdown("___")
+
 
 
 def pivTable(ptab):
@@ -26,7 +29,7 @@ def pivTable(ptab):
     try:
         
         st.markdown("___")
-        st.header('Pivot Table Analysis')
+        screen1.header('Pivot Table Analysis')
 
         numCols = st.radio('Single or Multiple Columns?', ('Single', 'Multiple'))
 
@@ -107,7 +110,8 @@ try:
 
     if pivot_table is None:
 
-        st.markdown(f"##### Make your selections above and then click on the 'Show Pivot Table' button.")
+        # st.markdown(f"##### Make your selections above and then click on the 'Show Pivot Table' button.")
+        screen2.markdown(f"### Make your selections below and then click on the 'Show Pivot Table' button.")
 
     else:
 
@@ -115,4 +119,23 @@ try:
 
 except KeyError:
 
-        st.error("It looks like you haven't loaded any data yet.")
+        screen2.error("It looks like you haven't loaded any data yet.")
+
+
+# if st.session_state['select_df'] is not None:
+      
+#     if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
+
+#         screen1.markdown(f"#### The map shows the :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
+
+#         mapItFolium(st.session_state['select_df'])
+
+#     else:
+
+#         screen1.markdown(f"#### The map shows ALL :red[{st.session_state['total_tree_count']}] entries. ")
+
+#         mapItFolium(st.session_state['select_df'])
+
+# else:
+
+#     st.error("Load data")
