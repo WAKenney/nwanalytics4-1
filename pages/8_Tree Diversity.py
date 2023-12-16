@@ -193,7 +193,7 @@ if st.session_state['select_df'] is not None:
 
 
 
-screen1.markdown('### You must load your data before you can proceed!')
+# screen1.markdown('### You must load your data before you can proceed!')
 
 
 # else:
