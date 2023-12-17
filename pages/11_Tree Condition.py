@@ -33,7 +33,12 @@ def treeCondition(data):
     st.header('Tree Condition Summary')
     
     try:
-    
+          # This is used in the tree condition function to loop through these columns
+        condColumns = ['reduced_crown', 'unbalanced_crown', 'defoliation', 'weak_or_yellow_foliage', 
+                       'dead_or_broken_branch', 'lean', 'poor_branch_attachment', 'branch_scars', 
+                       'trunk_scars', 'conks', 'branch_rot_or_cavity', 'trunk_rot_or_cavity', 'confined_space',
+                       'crack', 'girdling_roots', 'exposed_roots', 'recent_trenching']
+        
         cols = ['0', '1', '2', '3']
 
         df = pd.DataFrame(index = condColumns, columns = cols)
