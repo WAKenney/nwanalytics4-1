@@ -12,9 +12,43 @@ st.subheader('Check Your Data')
 
 st.markdown("___")
 
-df_trees = st.session_state['df_trees']
 
-df_trees.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block',
+# df_trees.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block',
+#                             'Tree Number' : 'tree_number', 'House Number' : 'house_number', 'Street Code' : 'street_code', 
+#                             'Species Code' : 'species_code', 'Location Code' : 'location_code', 'location':'location_code', 
+#                             'Ownership Code' : 'ownership_code','ownership':'ownership_code','Ownership code':'ownership_code', 
+#                             'Number of Stems' : 'number_of_stems', 'DBH' : 'dbh', 'Hard Surface' : 'hard_surface', 
+#                             'Crown Width' : 'crown_width', 'Ht to Crown Base' : 'height_to_crown_base', 
+#                             'Total Height' : 'total_height', 'Reduced Crown' : 'reduced_crown', 
+#                             'Unbalanced Crown' : 'unbalanced_crown', 'Defoliation' : 'defoliation', 
+#                             'Weak or Yellowing Foliage' : 'weak_or_yellow_foliage', 
+#                             'Dead or Broken Branch' : 'dead_or_broken_branch', 'Lean' : 'lean', 
+#                             'Poor Branch Attachment' : 'poor_branch_attachment', 'Branch Scars' : 'branch_scars', 
+#                             'Trunk Scars' : 'trunk_scars', 'Conks' : 'conks', 'Rot or Cavity - Branch' : 'branch_rot_or_cavity', 
+#                             'Rot or Cavity - Trunk' : 'trunk_rot_or_cavity', 'Confined Space' : 'confined_space', 
+#                             'Crack' : 'crack', 'Girdling Roots' : 'girdling_roots', 'Exposed Roots' :  'exposed_roots', 
+#                             'Recent Trenching' : 'recent_trenching', 'Cable or Brace' : 'cable_or_brace', 
+#                             'Conflict with Wires' : 'wire_conflict', 'Conflict with Sidewalk' : 'sidewalk_conflict', 
+#                             'Conflict with Structure' : 'structure_conflict', 'Conflict with Another Tree' : 'tree_conflict', 
+#                             'Conflict with Traffic Sign' : 'sign_conflict', 'Comments' : 'comments', 
+#                             'Longitude' : 'longitude', 'Latitude' : 'latitude', 
+#                             'Street' : 'street', 'Family' : 'family', 'Genus' : 'genus', 'Species' : 'species', 
+#                             'Invasivity' : 'invasivity', 'Species Suitability' : 'suitability', 
+#                             'Diversity Level' : 'diversity_level', 'Native' : 'native', 'Crown Projection Area (CPA)' : 'cpa', 
+#                             'Address' : 'address', 'DBH Class' : 'dbh_class', 'Relative DBH' : 'rdbh', 'Relative Dbh' : 'rdbh', 
+#                             'Relative DBH Class' : 'rdbh_class', 'Structural Defects' : 'structural', 
+#                             'Health Defects' : 'health', 'Description' : 'description', 'Defects' : 'defects', 
+#                             'Defect Colour' : 'defectColour',  'Total Demerits' : 'demerits', 'Simple Rating' : 'simple_rating'},
+#                             inplace = True)
+
+
+def check_data(df):
+    '''Checks df_trees for anomolies and adds a column showing errors that may crash the program
+    and a column with warnings that may impact the results'''
+
+    with st.spinner(text = 'Checking your data, please wait...'):
+
+        df_trees.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block',
                             'Tree Number' : 'tree_number', 'House Number' : 'house_number', 'Street Code' : 'street_code', 
                             'Species Code' : 'species_code', 'Location Code' : 'location_code', 'location':'location_code', 
                             'Ownership Code' : 'ownership_code','ownership':'ownership_code','Ownership code':'ownership_code', 
@@ -41,13 +75,6 @@ df_trees.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID
                             'Health Defects' : 'health', 'Description' : 'description', 'Defects' : 'defects', 
                             'Defect Colour' : 'defectColour',  'Total Demerits' : 'demerits', 'Simple Rating' : 'simple_rating'},
                             inplace = True)
-
-
-def check_data(df):
-    '''Checks df_trees for anomolies and adds a column showing errors that may crash the program
-    and a column with warnings that may impact the results'''
-
-    with st.spinner(text = 'Checking your data, please wait...'):
 
         # Older versions of the data didn't include surface roots.  To avoid crashing the app, this function checks to see if surface roots are in the data.
         # If not, then this attribute is removed from the list of column names (cols)
@@ -235,9 +262,12 @@ def check_data(df):
 
         st.dataframe(dfCheck, hide_index=True)
 
-if "df_trees" not in st.session_state:
-
-    st.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load and Existing...")
 
 
-check_data(st.session_state['df_trees'])
+if len(st.session_state['df_trees']) == 0:
+
+    st.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
+
+else:
+
+    check_data(st.session_state['df_trees'])
