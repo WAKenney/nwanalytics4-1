@@ -206,6 +206,8 @@ def create_summary_data():
         df_trees['street_code'] = df_trees['street_code'].str.lower()
         df_trees['street_code'] = df_trees['street_code'].str.strip()
 
+
+        df_trees['ownership_code'].fillna(value='not assessed', inplace=True)
         df_trees['ownership_code'] = df_trees['ownership_code'].str.lower()
         df_trees['ownership_code'] = df_trees['ownership_code'].str.strip()
 
