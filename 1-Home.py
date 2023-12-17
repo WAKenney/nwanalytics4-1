@@ -27,23 +27,32 @@ st.write("Last updated:", formatted_date)
 
 
 with st.expander("Click here for help in getting started.", expanded=False):
-    st.markdown("""
-        Neighbourwoods is a community-based program to assist community groups in the stewardship of the urban forest in their neighbourhood.
-        Using NWAnalytics, you can map and analyze various aspects of the urban forest that will help you develop and implement stewardship strategies.
-        At present, you must first have your Neighbourwoods tree inventory data in a Neighbourwoods MS excel workbook (version 2.6 or greater).
+    st.markdown(f"""
+        __Neighbour*woods*__ is a community-based program to assist community groups in the stewardship of the urban forest in their neighbourhood.
+        Using Neighbour*woods* Analytics, you can map and analyze various aspects of the urban forest that will help you develop and implement stewardship strategies.
+        
+        To get started, select your Neighbour*woods* inventory data for analysis.  This data should be either in a Neighbour*woods* INPUT format or a Neighbour*woods* SUMMARY format.
+        The INPUT format is that which you have collected in the field.  It includes all the species and site characteristics, the tree measurements, the tree condition data (e.g. defoliation, reduced crow, etc.)
+        the conflicts and the x and y (latitude and longitude) coordinates.  To complete the various analyses available in NWAnalytics, several additional parameters 
+        must be generated from the inventory data.  To do this, click on the __Create or Refresh a Summary Worksheet__ tab in the sidebar at the left.  You will be asked to 
+        select a worksheet. This can be an Excel worksheet with the INPUT data as described above (the "raw" inventory data) or an existing SUMMARY data worksheet that was 
+        generate previously but in which you have made some changes or additions.  In the latter case, you are simply refreshing the existing summary.
+                
+        When you Create or Refresh as file, you will be given a chance to save the data as a SUMMARY file to be used in the future.
 
-        To get started, select your Neighbourwoods MS excel workbook at the sidebar on the left. Once your data has been uploaded (this may take 
-        a few minutes if you have a big file, be patient) you will be asked to select the functions you want to display.  Select as many as you 
-        want from the dropdown list __AND CLICK ON CONTINUE__.  The selected analyses will be shown in the main frame.
+        If you have an existing Summary worksheet which you have created or refreshed and then saved, you can simply load that by clicking on the __Load an Existing Summary Worksheet__ tab at the left.
+        This will speed up the loading of data without the need to generate the additional parameters.
+                
+        Once you have either Created/Refreshed a summary sheet or Loaded an Existing Worksheet, you can proceed with the various analyses shown at the left. You can conduct 
+        these analyses on all the data, or you can filter the data for specific queries. For hints on filtering your data, click on the button in the __Filter Your Data__ screen.
 
-        You can conduct these analyses on all the data, or you can filter the data for specific queries. For hints on filtering your data, click on the button below.
-
-        In various places you will have opportunities to click on a box 
-        for more information, just as you are reading this text.  To close these boxes, simply click on the header button again.
+        In various places you will have opportunities to click on a box for more information, just as you are reading this text.  
+        To close these boxes, simply click on the header button again.
 
         Click on the following link to read more about Neighbourwoods: http://neighbourwoods.org/')
 
         For support, contact Andy Kenney at:     a.kenney@utoronto.ca
+
 """)
 
 st.session_state['speciesTable'] = []
