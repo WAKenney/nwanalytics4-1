@@ -11,27 +11,19 @@ title = 'new_nw_header.png'
 
 titleCol2.image(title, use_column_width=True)
 
-# st.subheader('Tree Species Suitability and Invasivity Analysis')
+st.subheader('Tree Species Suitability & Invasivity Analysis')
 
 st.markdown("___")
 
 screen1 = st.empty()
-
-st.markdown("___")
-
 screen2 = st.empty()
 screen3 = st.empty()
 
 st.markdown("___")
 
-screen1.markdown(f'## Tree Species Origin Analysis')
-
 def speciesSuitablity(data):
     """Summarize species suitability"""
 
-    st.markdown("___")
-    st.header('Tree Species Suitability Summary')
-    
     with st.expander("Click here to read about species suitability", expanded=False):
     
         st.markdown('''Tree species suitability is based on an expert opinion survey conducted by ISA Ontario during the development of

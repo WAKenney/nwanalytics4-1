@@ -11,20 +11,15 @@ title = 'new_nw_header.png'
 
 titleCol2.image(title, use_column_width=True)
 
-# st.subheader('Tree Species Origin Analysis')
+st.subheader('Tree Ownership Analysis')
 
 st.markdown("___")
 
 screen1 = st.empty()
-
-st.markdown("___")
-
 screen2 = st.empty()
 screen3 = st.empty()
 
 st.markdown("___")
-
-screen1.markdown(f'## Tree Ownership Analysis')
 
 
 def ownership(data):
@@ -35,9 +30,6 @@ def ownership(data):
     ownershipText = {'c':'City', 'p':'Private', 'j':'Joint'}
     data['ownership_code'] = data['ownership_code'].map(ownershipText)
 
-    st.markdown("___")
-    st.header('Tree Ownership Summary')
-    
     with st.expander("Click here to read an explanation of Ownership summary.", expanded=False):
         
             st.markdown('''Coming soon ..... 

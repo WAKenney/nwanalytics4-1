@@ -11,27 +11,19 @@ title = 'new_nw_header.png'
 
 titleCol2.image(title, use_column_width=True)
 
-# st.subheader('Tree Species Origin Analysis')
+st.subheader('Tree Relative DBH Analysis')
 
 st.markdown("___")
 
 screen1 = st.empty()
-
-st.markdown("___")
-
 screen2 = st.empty()
 screen3 = st.empty()
 
 st.markdown("___")
 
-screen1.markdown(f'## Tree Relative DBH Analysis')
-
-
 def relativeDBH(data):
     
     """Summarize Relative DBH"""
-
-    st.markdown("___")
 
     with st.expander("Click here to read some comments about the DBH and Relative DBH analysis.", expanded=False):
     

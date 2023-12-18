@@ -11,15 +11,15 @@ title = 'new_nw_header.png'
 
 titleCol2.image(title, use_column_width=True)
 
+st.subheader('Create a Pivot Table')
+
 st.markdown("___")
 
 screen1 = st.empty()
+screen2 = st.empty()
+screen3 = st.empty()
 
 st.markdown("___")
-
-screen2 = st.empty()
-# screen3 = st.empty()
-
 
 
 
@@ -28,7 +28,6 @@ def pivTable(ptab):
 
     try:
         
-        st.markdown("___")
         screen1.header('Pivot Table Analysis')
 
         numCols = st.radio('Single or Multiple Columns?', ('Single', 'Multiple'))
@@ -104,38 +103,22 @@ def pivTable(ptab):
     except:
         st.error("Oh no!  Something went wrong.  Check to make sure that your filters in the pivot tabel setup make sense.")
 
-try:
+
+
+if len(st.session_state['df_trees']) == 0:
+
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
+
+else:
 
     pivot_table = pivTable(st.session_state['select_df'])
 
-    if pivot_table is None:
+    st.dataframe(pivot_table)
+    
+    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
-        # st.markdown(f"##### Make your selections above and then click on the 'Show Pivot Table' button.")
-        screen2.markdown(f"### Make your selections below and then click on the 'Show Pivot Table' button.")
+        screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
 
     else:
 
-        st.dataframe(pivot_table)
-
-except KeyError:
-
-        screen2.error("It looks like you haven't loaded any data yet.")
-
-
-# if st.session_state['select_df'] is not None:
-      
-#     if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
-
-#         screen1.markdown(f"#### The map shows the :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
-
-#         mapItFolium(st.session_state['select_df'])
-
-#     else:
-
-#         screen1.markdown(f"#### The map shows ALL :red[{st.session_state['total_tree_count']}] entries. ")
-
-#         mapItFolium(st.session_state['select_df'])
-
-# else:
-
-#     st.error("Load data")
+        screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")

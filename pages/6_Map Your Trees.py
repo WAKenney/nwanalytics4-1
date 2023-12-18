@@ -20,11 +20,10 @@ screen3 = st.empty()
 
 st.markdown("___")
 
-main_screen = st.empty()
-
 def mapItFolium(mapData):
     '''Generates a folium map using the selected dataframe
     '''
+    screen2.markdown(f"#### Setting up the map data.")
 
     mapData.rename(columns = {'Tree Name' : 'tree_name', 'Longitude' : 'longitude', 'Latitude' : 'latitude', 'Crown Width' : 'crown_width', 
                               'Defect Colour' : 'defectColour', 'Description' : 'description'}, inplace = True)
@@ -40,19 +39,14 @@ def mapItFolium(mapData):
 
     mapData['crown_radius'] = mapData['crown_width']/2
 
-    #calculate the average Latitude value and average Longitude value to use to centre the map
-    # avLat = mapData['latitude'].mean()  
-    # avLon = mapData['longitude'].mean()
-    
-    #calculate the avergae lat and lon for centering the map and the max and min values to set the bounds of the map
-    # avLat=st.session_state('avLat')
-    # avLon=st.session_state('avLat')
+    #calculate the corner points of the data to use to centre the map
     maxLat=mapData['latitude'].max()
     minLat=mapData['latitude'].min()
     maxLon=mapData['longitude'].max()
     minLon=mapData['longitude'].min()
     
     #setup the map
+    screen2.markdown(f"#### Preparing the map.")
     treeMap = folium.Map(location=[st.session_state['avLat'], st.session_state['avLon']],  
         zoom_start=5,
         max_zoom=100, 
@@ -92,30 +86,29 @@ def mapItFolium(mapData):
 
     # add a fullscreen option and layer control to the map
     Fullscreen().add_to(treeMap)
+    
+    #add a layer control to the map
     folium.LayerControl().add_to(treeMap)
     
     # Show the map in Streamlit
 
+    screen2.empty()
+
     folium_static(treeMap)
 
-    #Add the legend saved at github called mapLegend.png
-    # st.image(currentDir + 'mapLegend.png')
+if len(st.session_state['df_trees']) == 0:
 
-
-if st.session_state['select_df'] is not None:
-      
-    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
-
-        screen1.markdown(f"#### The map shows the :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
-
-        mapItFolium(st.session_state['select_df'])
-
-    else:
-
-        screen1.markdown(f"#### The map shows ALL :red[{st.session_state['total_tree_count']}] entries. ")
-
-        mapItFolium(st.session_state['select_df'])
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
 else:
 
-    st.error("Load data")
+    mapItFolium(st.session_state['select_df'])
+
+    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
+
+        screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
+
+    else:
+
+        screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
+        

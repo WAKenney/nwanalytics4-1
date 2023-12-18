@@ -28,7 +28,9 @@ with st.expander("Click here for hints on filtering your data", expanded=False):
     st.markdown("""The table below shows your inventory data.\
                   To filter the data you must first click on the 'Add filters' check box."""
     )
-# def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+
+select_df =[]
+
 def filter_dataframe(df):
     """
     Adds a UI on top of a dataframe to let viewers filter columns
@@ -103,46 +105,31 @@ def filter_dataframe(df):
                     df = df[df[column].astype(str).str.contains(user_text_input)]
 
     # st.write(len(to_filter_columns))
+                    
+    #Store the filtered data (select_df in the session_state as select_df)
 
-    st.download_button("Download filtered data as a csv file",
-                       df.to_csv().encode('utf-8'),
-                       file_name = "Filtered_data.csv",
-                       mime = 'text/csv')
+    st.session_state['select_df'] = select_df
 
+    #Add the number of entries in select_df to session_state
+    select_tree_count = select_df.shape[0]
 
+    st.session_state['select_tree_count'] = select_tree_count
+
+    #show the filtered dataframe select_df and the number of entries
+        
     return df
 
 
 #Call filter_dataframe to do the filtering and save the result as select_df
-select_df = filter_dataframe(st.session_state['df_trees'])
 
-#calculate avLat and avlon for the selected dat and store in session_state
-st.session_state['avLat'] = select_df['latitude'].mean()
+if len(st.session_state['df_trees']) == 0:
 
-st.session_state['avLon'] = select_df['longitude'].mean()
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
+else:
 
-#Store the filtered data (select_df in the session_state as select_df)
-if select_df not in st.session_state:
+    select_df = filter_dataframe(st.session_state['df_trees'])
 
-    st.session_state['select_df'] = []
-
-st.session_state['select_df'] = select_df
-
-#Add the number of entries in select_df to session_state
-select_tree_count = select_df.shape[0]
-
-if select_df not in st.session_state:
-
-    st.session_state['select_tree_count'] = []
-
-st.session_state['select_tree_count'] = select_tree_count
-
-
-#show the filtered dataframe select_df and the number of entries
-
-if "select_df" in st.session_state:
-    
     if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
         screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
@@ -153,8 +140,3 @@ if "select_df" in st.session_state:
 
         screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
         st.session_state['df_trees']
-
-else:
-
-    st.session_state['df_trees']
-

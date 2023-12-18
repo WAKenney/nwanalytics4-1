@@ -12,6 +12,13 @@ st.subheader('Check Your Data')
 
 st.markdown("___")
 
+screen1 = st.empty()
+screen2 = st.empty()
+screen3 = st.empty()
+
+st.markdown("___")
+
+
 
 # df_trees.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block',
 #                             'Tree Number' : 'tree_number', 'House Number' : 'house_number', 'Street Code' : 'street_code', 
@@ -266,7 +273,7 @@ def check_data(df):
 
 if len(st.session_state['df_trees']) == 0:
 
-    st.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
 else:
 
