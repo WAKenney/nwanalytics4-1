@@ -110,15 +110,19 @@ def relativeDBH(data):
     st.plotly_chart(rdbhFig)
 
 
-if st.session_state['select_df'] is not None:
+if len(st.session_state['select_df']) == 0:
 
-        if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
-            screen2.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
+else:
 
-        else:
+    relativeDBH(st.session_state.select_df)
+    
+    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
-            screen2.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
-            # st.session_state['df_trees']
+        screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
 
-        relativeDBH(st.session_state.select_df)
+    else:
+
+        screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
+

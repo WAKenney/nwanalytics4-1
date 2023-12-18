@@ -129,33 +129,21 @@ if df_trees is not None:
     
     st.dataframe(df_trees)
 
-    #Add df_trees to session_state
-    if "df_trees" not in st.session_state:
-
-        st.session_state['df_trees'] = []
-
+    #add df_trees to session_state
     st.session_state['df_trees'] = df_trees
+
+    #Add select_df to session_state but at this point it is the same as df_trees.  This will be replaced if a filter is applied
+    st.session_state['select_df'] = df_trees
 
     total_tree_count = df_trees.shape[0]
 
-    #Add select_df to session_state but at this point it is the same as df_trees.  This will be replaced if a filter is applied
-    if "select_df" not in st.session_state:
-
-        st.session_state['select_df'] = []
-
-    st.session_state['select_df'] = df_trees
     st.session_state['select_tree_count'] = total_tree_count
-
-    #add average latitude and average longitude to session state
-    st.session_state['avLat'] = df_trees['latitude'].mean()
-    st.session_state['avLon'] = df_trees['longitude'].mean()
-    
-    if "total_tree_count" not in st.session_state:
-
-        st.session_state['total_tree_count'] = []
 
     st.session_state['total_tree_count'] = total_tree_count
 
-    # let_it_rain()
-
+    #add average latitude and average longitude to session state
+    st.session_state['avLat'] = df_trees['latitude'].mean()
+    
+    st.session_state['avLon'] = df_trees['longitude'].mean()
+    
     screen1.markdown(f'#### Your data is loaded with :red[{total_tree_count}] entries. You can now proceed with the mapping and analyses by selecting a function from the sidebar at the left. :arrow_backward:')

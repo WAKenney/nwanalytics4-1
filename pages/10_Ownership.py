@@ -81,21 +81,19 @@ def ownership(data):
     st.plotly_chart(ownershipPieCPA)
 
 
+if len(st.session_state['df_trees']) == 0:
 
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
+else:
 
+    ownership(st.session_state.select_df)
+    
+    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
+        screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
 
-if st.session_state['select_df'] is not None:
+    else:
 
-        if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
-
-            screen2.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
-
-        else:
-
-            screen2.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
-            # st.session_state['df_trees']
-
-        ownership(st.session_state.select_df)
+        screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
 

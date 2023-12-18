@@ -105,7 +105,9 @@ def filter_dataframe(df):
                     df = df[df[column].astype(str).str.contains(user_text_input)]
 
     # st.write(len(to_filter_columns))
-                    
+
+    select_df = df
+
     #Store the filtered data (select_df in the session_state as select_df)
 
     st.session_state['select_df'] = select_df
@@ -128,15 +130,14 @@ if len(st.session_state['df_trees']) == 0:
 
 else:
 
-    select_df = filter_dataframe(st.session_state['df_trees'])
-
+    filter_dataframe(st.session_state['df_trees'])
+    
     if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
         screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
 
-        st.session_state['select_df']
-
     else:
 
         screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
-        st.session_state['df_trees']
+
+    st.dataframe(st.session_state['select_df'])

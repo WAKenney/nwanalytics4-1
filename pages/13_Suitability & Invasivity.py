@@ -148,16 +148,19 @@ def speciesSuitablity(data):
 
     st.plotly_chart(invasivityPieCPA)
 
+if len(st.session_state['select_df']) == 0:
 
-if st.session_state['select_df'] is not None:
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
-        if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
+else:
 
-            screen2.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
+    speciesSuitablity(st.session_state.select_df)
+    
+    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
-        else:
+        screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
 
-            screen2.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
-            # st.session_state['df_trees']
+    else:
 
-        speciesSuitablity(st.session_state.select_df)
+        screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
+

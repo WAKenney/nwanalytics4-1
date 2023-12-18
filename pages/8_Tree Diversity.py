@@ -172,31 +172,23 @@ def diversity(data):
 
 
 #show the filtered dataframe select_df and the number of entries
-
-if 'select_df' not in st.session_state:
-
-    st.session_state['select_df'] =[]
+    
 
 
-if st.session_state['select_df'] is not None:
+if len(st.session_state['df_trees']) == 0:
 
-        diversity(st.session_state.select_df)
+    screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
-        if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
+else:
 
-            screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
+    diversity(st.session_state.select_df)
 
-        else:
+    st.dataframe(pivot_table)
+    
+    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
-            screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
-            # st.session_state['df_trees']
+        screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
 
+    else:
 
-
-# screen1.markdown('### You must load your data before you can proceed!')
-
-
-# else:
-
-#     st.session_state['df_trees']
-
+        screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")

@@ -55,7 +55,7 @@ def check_data(df):
 
     with st.spinner(text = 'Checking your data, please wait...'):
 
-        df_trees.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block',
+        df.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block',
                             'Tree Number' : 'tree_number', 'House Number' : 'house_number', 'Street Code' : 'street_code', 
                             'Species Code' : 'species_code', 'Location Code' : 'location_code', 'location':'location_code', 
                             'Ownership Code' : 'ownership_code','ownership':'ownership_code','Ownership code':'ownership_code', 
@@ -271,10 +271,18 @@ def check_data(df):
 
 
 
-if len(st.session_state['df_trees']) == 0:
+if len(st.session_state['select_df']) == 0:
 
     screen2.error("You haven't loaded a file yet.  Either go to the 'Create or Refresh...' function in the side bar or the ' Load an Existing...")
 
 else:
 
-    check_data(st.session_state['df_trees'])
+    check_data(st.session_state['select_df'])
+
+    if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
+
+        screen1.markdown(f"#### There are :red[{st.session_state['select_tree_count']}] entries in the filtered data. ")
+
+    else:
+
+        screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
