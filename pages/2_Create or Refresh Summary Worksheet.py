@@ -633,9 +633,6 @@ def create_summary_data():
 
         st.session_state['select_df'] = df_trees
 
-        st.write(df_trees.columns)
-
-
         df_trees.rename(columns = {'tree_name' : 'Tree Name', 'date' : 'Date', 'block' : 'Block ID', 'tree_number' : 'Tree Number', 
                                    'house_number' : 'House Number', 'street_code' : 'Street Code', 'species_code' : 'Species Code', 
                                    'location_code' : 'Location Code', 'ownership_code' : 'Ownership Code', 
