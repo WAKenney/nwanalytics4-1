@@ -108,16 +108,19 @@ def diversity(data):
     
     #Add a column to the table showing the percetage of CPA for each species
     topTenPlusOther['percent'] = topTenPlusOther['frequency']/topTenPlusOther['frequency'].sum()
-
+    
+    topTenPlusOther['percent'] = [i*100 for i in topTenPlusOther['percent']]
 
     with st.expander("Click to view tabular data.", expanded=False):
-        # divTable = ff.create_table(topTenPlusOther.round(decimals = 0))
-        # st.plotly_chart(divTable)
-
-        st.dataframe(topTenPlusOther, hide_index = True, 
-            column_order=(divLevel, "frequency", "percent"))
-
-
+        
+        st.dataframe(topTenPlusOther, height = 500, use_container_width=True,
+                    column_order=(divLevel, "frequency", "percent"),
+                    column_config={"species": "Species", 
+                                   'frequency': 'Number of Trees', 
+                                   'percent':'Percent'},
+                    hide_index=True,
+                    )
+       
     st.plotly_chart(speciesPie)
     
     st.subheader('Diversity based on crown projection area (CPA)')
@@ -160,8 +163,14 @@ def diversity(data):
     #Create an expander to show the tabular data
     with st.expander("Click to view tabular data.", expanded=False):
 
-        st.dataframe(topTenCpaPlusOther, hide_index = True, 
-            column_order=(divLevel, "Crown Projection Area", "percent"))
+         st.dataframe(topTenCpaPlusOther, height = 500, use_container_width=True,
+                    column_order=(divLevel, "Crown Projection Area", "percent"),
+                    column_config={
+                    "species": "Species", 'frequency': 'Crown Projection Area', 'percent':'%'},
+                    hide_index=True,
+            )
+        
+
     
     CpaPie.update_traces(insidetextorientation='radial', textinfo='label+percent') 
     CpaPie.update_layout(showlegend=False)
