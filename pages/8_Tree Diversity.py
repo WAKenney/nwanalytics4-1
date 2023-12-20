@@ -125,6 +125,7 @@ def diversity(data):
 
     st.plotly_chart(speciesPie)
     
+    st.markdown('---')
     st.subheader('Diversity based on crown projection area (CPA)')
     
     totalCpa = data['cpa'].sum()
