@@ -54,7 +54,7 @@ def diversity(data):
             With this in mind, look at the pie charts for frequency (number of trees) for species, genus and family by selectiong each of the radio buttons above to determine if
             some are over-planted.  This could help to guide planting recommendations. __Use caution when assessing filtered data!__
             
-            In the following pie charts, "other" represents all species, genera or families not inccluded in the top ten making up the rest of the chart. 
+            In the following pie charts, "other" represents all species, genera or families not included in the top ten making up the rest of the chart. 
 
             * Santamour, F.S. undated. Trees for urban planting: Diversity, uniformity, and common sense. 
             U.S. National Arboretum.  Washington D.C.).
@@ -113,14 +113,16 @@ def diversity(data):
 
     with st.expander("Click to view tabular data.", expanded=False):
         
-        st.dataframe(topTenPlusOther, height = 500, use_container_width=True,
-                    column_order=(divLevel, "frequency", "percent"),
-                    column_config={"species": "Species", 
-                                   'frequency': 'Number of Trees', 
-                                   'percent':'Percent'},
-                    hide_index=True,
-                    )
-       
+        st.dataframe(topTenPlusOther, hide_index=True, use_container_width=True, height = 500,
+            column_order=(divLevel, 'frequency', 'percent'),
+            column_config = {
+                 "species":"Species", 
+                 "frequency":"Number of Trees",
+                 "percent":st.column_config.NumberColumn("Percent", format = "%.1f")
+             })
+
+
+
     st.plotly_chart(speciesPie)
     
     st.subheader('Diversity based on crown projection area (CPA)')
@@ -160,15 +162,25 @@ def diversity(data):
     #Add a column to the table showing the percetage of CPA for each species
     topTenCpaPlusOther['percent'] = topTenCpaPlusOther['Crown Projection Area']/topTenCpaPlusOther['Crown Projection Area'].sum()
 
+    topTenCpaPlusOther['percent'] = [i*100 for i in topTenCpaPlusOther['percent']]
+
     #Create an expander to show the tabular data
     with st.expander("Click to view tabular data.", expanded=False):
+         
+         st.dataframe(topTenCpaPlusOther, hide_index=True, use_container_width=True, height = 500,
+            column_order=(divLevel, 'Crown Projection Area', 'percent'),
+            column_config = {
+                 "Crown Projection Area":st.column_config.NumberColumn("Crown Projection Area", format = "%.0f"),
+                 "percent":st.column_config.NumberColumn("Percent", format = "%.1f")
+             })
 
-         st.dataframe(topTenCpaPlusOther, height = 500, use_container_width=True,
-                    column_order=(divLevel, "Crown Projection Area", "percent"),
-                    column_config={
-                    "species": "Species", 'frequency': 'Crown Projection Area', 'percent':'%'},
-                    hide_index=True,
-            )
+
+        #  st.dataframe(topTenCpaPlusOther, height = 500, use_container_width=True,
+        #             column_order=(divLevel, "Crown Projection Area", "percent"),
+        #             column_config={
+        #             "species": "Species", 'frequency': 'Crown Projection Area', 'percent':'%'},
+        #             hide_index=True,
+        #     )
         
 
     
@@ -191,8 +203,6 @@ if len(st.session_state['df_trees']) == 0:
 else:
 
     diversity(st.session_state.select_df)
-
-    st.dataframe(pivot_table)
     
     if st.session_state['total_tree_count'] != st.session_state['select_tree_count']:
 
