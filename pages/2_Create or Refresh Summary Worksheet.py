@@ -601,7 +601,7 @@ def create_summary_data():
 
 
         df_trees = df_trees.astype({'block' : 'category', 'street_code' : 'category', 'species_code' : 'category', 
-                                   'location_code' : 'category', 'ownership_code' : 'category', 
+                                   'house_number':'str','location_code' : 'category', 'ownership_code' : 'category', 
                                    'reduced_crown' : 'category', 'unbalanced_crown' : 'category', 'defoliation' : 'category', 
                                    'weak_or_yellow_foliage' : 'category', 'dead_or_broken_branch' : 'category', 'lean' : 'category', 
                                    'poor_branch_attachment' : 'category', 'branch_scars' : 'category', 
