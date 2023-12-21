@@ -119,21 +119,32 @@ def speciesSuitablity(data):
     with st.expander("Click to view a list of invasive tree species in your data set.", expanded=False):
    
         invasiveSpeciesOnly = invasivityData.loc[invasivityData['invasivity']=='invasive']     
+        
         invasiveSpeciesOnly.rename(columns = {'tree_name': 'frequency'},inplace = True)
+        
         invasivitySpeciesTable = pd.pivot_table(invasiveSpeciesOnly, index='species', values = 'frequency', aggfunc='count')
-        invasivitySpeciesTable.reset_index(inplace=True)
-        invasivitySpeciesTable = ff.create_table(invasivitySpeciesTable)
-        st.plotly_chart(invasivitySpeciesTable)
-    
+
+        invasivitySpeciesTable = invasivitySpeciesTable.sort_values(by=['frequency'], ascending=False)
+
+        
+        invasivitySpeciesTable = invasivitySpeciesTable.loc[lambda invasivitySpeciesTable: invasivitySpeciesTable['frequency'] > 0]
+
+
+        st.dataframe(invasivitySpeciesTable, column_config = {
+            "species":"Species",
+            "frequency":st.column_config.NumberColumn("Number of Trees", width = 'medium')
+            })
+
     
     st.plotly_chart(invasivityPie)
 
     st.subheader('Invasivity by crown projection area (cpa)')
 
     invasivityDataCPA = data.loc[: , ['invasivity', 'cpa']]
+    
     invasivityPTCPA = pd.pivot_table(invasivityDataCPA, index='invasivity', aggfunc='sum')
+    
     invasivityPTCPA.reset_index(inplace=True)
-    # invasivityPT.rename(columns = {'tree_name': 'frequency'},inplace = True)
     
     invasivityPieCPA = px.pie(invasivityPTCPA, values='cpa', names = 'invasivity',
         color = 'invasivity',
@@ -141,7 +152,9 @@ def speciesSuitablity(data):
                                 'non-invasive':'darkgreen'})
     
     invasivityPieCPA.update_traces(insidetextorientation='radial', textinfo='label+percent') 
+    
     invasivityPieCPA.update_layout(showlegend=False)
+    
     invasivityPieCPA.update_traces(textfont_size=15,
                   marker=dict(line=dict(color='#000000', width=1)))
     
