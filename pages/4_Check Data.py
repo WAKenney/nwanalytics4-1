@@ -281,7 +281,7 @@ def check_data(df):
             'rdbh_class', 'structural', 'health', 'defects',
             ]
         
-        st.dataframe(dfCheck, hide_index=True, use_container_width=True, height = 35 * dfCheck.shape[0],
+        st.dataframe(dfCheck, hide_index=True, use_container_width=True, height = 50 * dfCheck.shape[0],
         column_order=column_order,
         column_config = {'cpa':st.column_config.NumberColumn( format = "%.1f")})
 
