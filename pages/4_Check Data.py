@@ -261,13 +261,46 @@ def check_data(df):
 
         st.markdown('---')
         st.subheader('Errors and Warnings')
-        st.markdown('''The following table shows entries with errors and warnings.  Scroll to the right to view the messages in the final two columns. 
-                        Warnings highlight issues that may result in some lost information whereas **errors _may_ result in the app crashing.  You should 
-                        correct errors before proceeding.**
-                        You can filter the columns just as you would in the main table.
-        ''')
+        st.markdown('''The following table shows entries with errors and warnings. Warnings highlight issues that may result in some lost information whereas 
+                    **errors _may_ result in the app crashing.  You should correct errors before proceeding.  You can download this table by hovering over the 
+                    table and clicking the download icon at the top right of the table.''')
 
-        st.dataframe(dfCheck, hide_index=True)
+        column_order = ['error', 'warning', 'tree_name', 'date', 'block', 'tree_number', 'house_number',
+            'street_code', 'species_code', 'location_code', 'ownership_code',
+            'number_of_stems', 'dbh', 'hard_surface', 'crown_width',
+            'height_to_crown_base', 'total_height', 'reduced_crown',
+            'unbalanced_crown', 'defoliation', 'weak_or_yellow_foliage',
+            'dead_or_broken_branch', 'lean', 'poor_branch_attachment',
+            'branch_scars', 'trunk_scars', 'conks', 'branch_rot_or_cavity',
+            'trunk_rot_or_cavity', 'confined_space', 'crack', 'girdling_roots',
+            'exposed_roots', 'recent_trenching', 'cable_or_brace', 'wire_conflict',
+            'sidewalk_conflict', 'structure_conflict', 'tree_conflict',
+            'sign_conflict', 'comments', 'longitude', 'latitude', 'street',
+            'family', 'genus', 'species', 'invasivity', 'suitability',
+            'diversity_level', 'origin', 'cpa', 'address', 'dbh_class', 'rdbh',
+            'rdbh_class', 'structural', 'health', 'defects',
+            ]
+        
+        st.dataframe(dfCheck, hide_index=True, use_container_width=True, height = 35 * dfCheck.shape[0],
+        column_order=column_order,
+        column_config = {'cpa':st.column_config.NumberColumn( format = "%.1f")})
+
+
+
+
+
+
+
+# column_order = ('tree_name', 'date', 'block', 'tree_number', 'house_number', 'cpa',
+#     'street_code', 'species_code', 'location_code', 'ownership_code',
+#     'number_of_stems', 'dbh', 'hard_surface', 'crown_width')
+
+# st.dataframe(df, hide_index=True, use_container_width=True, height = 500,
+#         column_order=column_order,
+#         column_config = {'tree_name':'Tree Name',
+#                          'date':'Date', 
+#                          'cpa':st.column_config.NumberColumn("Crown Projection Area", format = "%.1f")})
+
 
 
 
