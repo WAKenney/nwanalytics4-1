@@ -16,7 +16,9 @@ st.subheader('Tree Species Suitability & Invasivity Analysis')
 st.markdown("___")
 
 screen1 = st.empty()
+
 screen2 = st.empty()
+
 screen3 = st.empty()
 
 st.markdown("___")
@@ -37,11 +39,12 @@ def speciesSuitablity(data):
 
     data = data.loc[data['diversity_level'] != 'other']
 
-
-    
     suitabilityData = data.loc[: , ['suitability', 'tree_name']]
+    
     suitabilityPT = pd.pivot_table(suitabilityData, index='suitability', aggfunc='count')
+    
     suitabilityPT.reset_index(inplace=True)
+    
     suitabilityPT.rename(columns = {'tree_name': 'frequency'},inplace = True)
 
     suitabilityPie = px.pie(suitabilityPT, values='frequency', names = 'suitability',
@@ -50,13 +53,18 @@ def speciesSuitablity(data):
                                 'Good':'springgreen',
                                 'Poor':'palegreen',
                                 'Very Poor':'yellow'})
+    
     suitabilityPie.update_traces(insidetextorientation='radial', textinfo='label+percent') 
+    
     suitabilityPie.update_layout(showlegend=False)
+    
     suitabilityPie.update_traces(textfont_size=15,
                   marker=dict(line=dict(color='#000000', width=1)))
     
     with st.expander("Click to view tabular data.", expanded=False):
+    
         suitabilityTable = ff.create_table(suitabilityPT.round(decimals = 0))
+    
         st.plotly_chart(suitabilityTable)
         
     st.plotly_chart(suitabilityPie)
@@ -65,7 +73,9 @@ def speciesSuitablity(data):
     st.subheader('Suitability by crown projection area (cpa)')
 
     suitabilityDataCPA = data.loc[: , ['suitability', 'cpa']]
+    
     suitabilityPTCPA = pd.pivot_table(suitabilityDataCPA, index='suitability', aggfunc='sum')
+    
     suitabilityPTCPA.reset_index(inplace=True)
     
     suitabilityPieCPA = px.pie(suitabilityPTCPA, values='cpa', names = 'suitability',
@@ -76,17 +86,20 @@ def speciesSuitablity(data):
                                 'Very Poor':'yellow'})
 
     suitabilityPieCPA.update_traces(insidetextorientation='radial', textinfo='label+percent') 
+    
     suitabilityPieCPA.update_layout(showlegend=False)
+    
     suitabilityPieCPA.update_traces(textfont_size=15,
                   marker=dict(line=dict(color='#000000', width=1)))
     
-
     st.plotly_chart(suitabilityPieCPA)
 
     st.markdown("___")
+    
     st.header('Tree Species Invasivity Summary (Ontario)')
     
     with st.expander("Click here to read about species invasivity", expanded=False):
+
         st.markdown('''The tree species indicated as invasive are based on data shown in https://www.ontarioinvasiveplants.ca/invasive-plants/species/''')
 
     st.subheader('Invasivity by the number of trees (frequency)')
@@ -94,7 +107,9 @@ def speciesSuitablity(data):
     invasivityData = data.loc[: , ['species', 'invasivity', 'tree_name']]
 
     invasivityPT = pd.pivot_table(invasivityData, index='invasivity', aggfunc='count')
+    
     invasivityPT.reset_index(inplace=True)
+    
     invasivityPT.rename(columns = {'tree_name': 'frequency'},inplace = True)
     
     invasivityPie = px.pie(invasivityPT, values='frequency', names = 'invasivity',
@@ -103,7 +118,9 @@ def speciesSuitablity(data):
                                 'non-invasive':'darkgreen'})
     
     invasivityPie.update_traces(insidetextorientation='radial', textinfo='label+percent') 
+    
     invasivityPie.update_layout(showlegend=False)
+    
     invasivityPie.update_traces(textfont_size=15,
                   marker=dict(line=dict(color='#000000', width=1)))
     
@@ -112,6 +129,7 @@ def speciesSuitablity(data):
         invasivityTable = invasivityPT.drop('species', axis=1, inplace=True)
 
         invasivityTable = ff.create_table(invasivityPT.round(decimals = 0))
+    
         st.plotly_chart(invasivityTable)
 
     # invasiveSpecies = data.loc[data['invasivity'] == 'invasive', 'species']
@@ -125,8 +143,7 @@ def speciesSuitablity(data):
         invasivitySpeciesTable = pd.pivot_table(invasiveSpeciesOnly, index='species', values = 'frequency', aggfunc='count')
 
         invasivitySpeciesTable = invasivitySpeciesTable.sort_values(by=['frequency'], ascending=False)
-
-        
+    
         invasivitySpeciesTable = invasivitySpeciesTable.loc[lambda invasivitySpeciesTable: invasivitySpeciesTable['frequency'] > 0]
 
 
@@ -176,4 +193,3 @@ else:
     else:
 
         screen1.markdown(f"#### All :red[{st.session_state['total_tree_count']}] entries are shown (no filter). ")
-
