@@ -1,8 +1,8 @@
 import pandas as pd
-import geopandas as gpd
+# import geopandas as gpd
 import streamlit as st
-from datetime import datetime
-
+# from datetime import datetime
+import requests
 
 st.cache_data.clear()
 
@@ -15,6 +15,31 @@ speciesFile = 'NWspecies220522.xlsx'
 titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
 
 title = 'nw4_splash_page.png'
+
+
+
+
+# # Function to get the last commit date and time
+# def get_last_commit_datetime(repo_url):
+#     api_url = f"{repo_url}/commits"
+#     response = requests.get(api_url)
+#     if response.status_code == 200:
+#         commit_data = response.json()
+#         last_commit_datetime = commit_data[0]['commit']['author']['date']
+#         return last_commit_datetime
+#     else:
+#         return "Error: Unable to fetch commit data"
+
+# # GitHub repository URL
+# repo_url = "https://github.com/WAKenney/nwanalytics4-1"
+
+# # Display the last commit date and time
+# last_commit_datetime = get_last_commit_datetime(repo_url)
+# st.write(f"Last commit date and time: {last_commit_datetime}")
+
+
+
+
 
 titleCol2.image(title)
 
