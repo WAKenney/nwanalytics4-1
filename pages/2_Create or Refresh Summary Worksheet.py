@@ -9,10 +9,6 @@ from streamlit_folium import folium_static
 from shapely.geometry import Point
 
 
-# from io import BytesIO
-# import base64
-
-
 st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 # currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
