@@ -20,9 +20,9 @@ titleCol2.image(title)
 
 
 
-now = datetime.now()
-formatted_date = now.strftime("%d-%m-%Y %H:%M:%S")
-st.write("Last updated:", formatted_date)
+# now = datetime.now()
+# formatted_date = now.strftime("%d-%m-%Y %H:%M:%S")
+# st.write("Last updated:", formatted_date)
 
 
 
