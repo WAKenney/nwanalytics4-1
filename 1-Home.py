@@ -18,14 +18,6 @@ title = 'nw4_splash_page.png'
 
 titleCol2.image(title)
 
-
-
-# now = datetime.now()
-# formatted_date = now.strftime("%d-%m-%Y %H:%M:%S")
-# st.write("Last updated:", formatted_date)
-
-
-
 with st.expander("Click here for help in getting started.", expanded=False):
     st.markdown(f"""
         __Neighbour*woods*__ is a community-based program to assist community groups in the stewardship of the urban forest in their neighbourhood.
