@@ -121,15 +121,16 @@ def create_summary_data():
     def clean_and_expand_data(df_trees):
 
        
-        df_trees.rename(columns = {'Tree Name' : 'tree_name', 'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block', 'Block':'block',
+        df_trees.rename(columns = {'Tree Name' : 'tree_name','Tree name' : 'tree_name', 
+                                   'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block', 'Block':'block',
                                    'Tree Number' : 'tree_number', 'Tree No' : 'tree_number', 'House Number' : 'house_number', 'Street Code' : 'street_code', 
                                    'Species Code' : 'species_code', 'Location Code' : 'location_code', 'location':'location_code', 
                                    'Ownership Code' : 'ownership_code','ownership':'ownership_code','Ownership code':'ownership_code', 
                                    'Number of Stems' : 'number_of_stems', 'DBH' : 'dbh', 'Hard Surface' : 'hard_surface', 'Hard surface' : 'hard_surface',
-                                   'Crown Width' : 'crown_width', 'Ht to Crown Base' : 'height_to_crown_base', 
+                                   'Crown Width' : 'crown_width', 'Ht to Crown Base' : 'height_to_crown_base','Ht to base' : 'height_to_crown_base', 
                                    'Total Height' : 'total_height', 'Reduced Crown' : 'reduced_crown', 
                                    'Unbalanced Crown' : 'unbalanced_crown', 'Defoliation' : 'defoliation', 'Weak or Yellow Foliage' : 'weak_or_yellow_foliage',
-                                   'Weak or Yellowing Foliage' : 'weak_or_yellow_foliage', 
+                                   'Weak or Yellowing Foliage' : 'weak_or_yellow_foliage','Weak or Yellow Foliage' : 'weak_or_yellow_foliage', 
                                    'Dead or Broken Branch' : 'dead_or_broken_branch', 'Lean' : 'lean', 
                                    'Poor Branch Attachment' : 'poor_branch_attachment', 'Branch Scars' : 'branch_scars', 
                                    'Trunk Scars' : 'trunk_scars', 'Conks' : 'conks', 'Rot or Cavity - Branch' : 'branch_rot_or_cavity', 
@@ -137,7 +138,8 @@ def create_summary_data():
                                    'Crack' : 'crack', 'Girdling Roots' : 'girdling_roots', 'Exposed Roots' :  'exposed_roots', 
                                    'Recent Trenching' : 'recent_trenching', 'Cable or Brace' : 'cable_or_brace', 
                                    'Conflict with Wires' : 'wire_conflict', 'Conflict with Sidewalk' : 'sidewalk_conflict', 
-                                   'Conflict with Structure' : 'structure_conflict', 'Conflict with Another Tree' : 'tree_conflict', 
+                                   'Conflict with Structure' : 'structure_conflict', 'Conflict with Another Tree' : 'tree_conflict',
+                                   'Conflict with another tree' : 'tree_conflict', 
                                    'Conflict with Traffic Sign' : 'sign_conflict', 'Comments' : 'comments', 
                                    'Longitude' : 'longitude', 'Latitude' : 'latitude'},
                                    inplace = True)
