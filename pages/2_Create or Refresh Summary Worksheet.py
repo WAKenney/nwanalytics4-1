@@ -62,12 +62,8 @@ def create_summary_data():
             st.session_state['speciesTable'] = []
 
         st.session_state['speciesTable'] = speciesTable
-
         
         return speciesTable
-
-
-#     speciesTable = getSpeciesTable()
 
 
     @st.cache_data(show_spinner="Loading your data, please wait ...")
@@ -139,7 +135,7 @@ def create_summary_data():
                                    'Recent Trenching' : 'recent_trenching', 'Cable or Brace' : 'cable_or_brace', 
                                    'Conflict with Wires' : 'wire_conflict', 'Conflict with Sidewalk' : 'sidewalk_conflict', 
                                    'Conflict with Structure' : 'structure_conflict', 'Conflict with Another Tree' : 'tree_conflict',
-                                   'Conflict with another tree' : 'tree_conflict', 
+                                   'Conflict with another tree' : 'tree_conflict',
                                    'Conflict with Traffic Sign' : 'sign_conflict', 'Comments' : 'comments', 
                                    'Longitude' : 'longitude', 'Latitude' : 'latitude'},
                                    inplace = True)
@@ -616,7 +612,7 @@ def create_summary_data():
                                    'sign_conflict' : 'category','street_name' : 'category', 'family' : 'category', 
                                    'genus' : 'category', 'species' : 'category', 
                                    'invasivity' : 'category', 'suitability' : 'category', 
-                                   'diversity_level' : 'category', 'invasivity' : 'category', 'dbh_class' : 'category', 
+                                   'diversity_level' : 'category', 'dbh_class' : 'category', 
                                    'rdbh_class' : 'category', 'structural' : 'category', 
                                    'health' : 'category', 'defects' : 'category'})
        
