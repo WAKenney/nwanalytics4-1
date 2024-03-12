@@ -13,7 +13,7 @@ st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style
 
 # currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
 
-speciesFile = 'NWspecies220522.xlsx'
+speciesFile = 'NWspecies120324.xlsx'
 
 #Create page title
 titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
@@ -48,8 +48,6 @@ def create_summary_data():
     @st.cache_data(show_spinner="Loading the species table, please wait ...")
     def getSpeciesTable():
         '''Load the species table from the Neighburwoods repo'''
-
-        # speciesFile = currentDir + 'NWspecies220522.xlsx'
 
         speciesTable = pd.read_excel(speciesFile,sheet_name = "species")
 

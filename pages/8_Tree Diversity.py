@@ -121,8 +121,6 @@ def diversity(data):
                  "percent":st.column_config.NumberColumn("Percent", format = "%.1f")
              })
 
-
-
     st.plotly_chart(speciesPie)
     
     st.markdown('---')
