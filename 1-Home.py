@@ -16,12 +16,12 @@ titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
 title = 'nw4_splash_page.png'
 
 # Print the date and time of the last commit
-st.write("This app was last updated on March 12 2024 4:00 pm")
+st.write("This app was last updated on March 13 2024 9:40 am")
 
 titleCol2.image(title)
 
 with st.expander("Click here for help in getting started.", expanded=False):
-    st.markdown(f"""
+    st.markdown("""
         __Neighbour*woods*__ is a community-based program to assist community groups in the stewardship of the urban forest in their neighbourhood.
         Using Neighbour*woods* Analytics, you can map and analyze various aspects of the urban forest that will help you develop and implement stewardship strategies.
         
