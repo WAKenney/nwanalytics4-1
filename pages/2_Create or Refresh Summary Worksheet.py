@@ -7,6 +7,7 @@ import pytz
 import folium
 from streamlit_folium import folium_static
 from shapely.geometry import Point
+import numpy as np
 
 
 st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
@@ -222,32 +223,6 @@ def create_summary_data():
         cols = df_trees.columns
 
 
-
-
-
-        # def getOrigin():
-            
-        #     origin = pd.read_excel(speciesFile, sheet_name = 'origin')
-
-        #     return origin
-
-
-        # df_origin = getOrigin()
-
-
-        # def getEcodistricts():
-
-        #     gpd_ecodistricts = gpd.read_file(r"https://github.com/WAKenney/NWAnalytics/blob/master/OntarioEcodistricts.gpkg")
-              
-        #     return gpd_ecodistricts
-
-
-        # gpd_ecodistricts = getEcodistricts()
-
-
-
-
-
         def getCodes():
 
             codes = pd.read_excel(speciesFile, sheet_name = 'codes')
@@ -341,21 +316,35 @@ def create_summary_data():
 
         def dbhClass(df):
 
-            if df['dbh']<20:
+            if df['species_code'] in ['x', 'dead']:
+                
+                return np.nan
+            
+            elif pd.isna(df['dbh']):
 
-                return 'I'
+                return np.nan
+            
+            elif df['dbh']==0:
 
-            elif df['dbh']<40:
+                return np.nan
 
-                return 'II'
+            else:
 
-            elif df['dbh']<60:
+                if df['dbh']<=20:
 
-                return 'III'
+                    return 'I'
 
-            else: 
+                elif df['dbh']<=40:
 
-                return 'IV'
+                    return 'II'
+
+                elif df['dbh']<=60:
+
+                    return 'III'
+
+                else: 
+
+                    return 'IV'
 
         df_trees['dbh_class'] = df_trees.apply(dbhClass, axis =1)
 
