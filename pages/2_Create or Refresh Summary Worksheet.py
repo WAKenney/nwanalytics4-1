@@ -273,7 +273,7 @@ def create_summary_data():
 
             #read the name of the selected ecodistrict and call it ecodName
             ecodistrict_name = (selected_polygon.ECODISTR_1[0])
-
+           
             return ecodistrict_name
 
         activeEcodist = get_ecodistrict()
@@ -598,21 +598,21 @@ def create_summary_data():
                                    'diversity_level' : 'category', 'dbh_class' : 'category', 
                                    'rdbh_class' : 'category', 'structural' : 'category', 
                                    'health' : 'category', 'defects' : 'category'})
-       
-
-         #Add df_trees to session_state
+              
+        
+        #Add df_trees to session_state
         if 'df_trees' not in st.session_state:
 
             st.session_state['df_trees'] = []
 
         st.session_state['df_trees'] = df_trees
 
-        #Add select_df to session_state but at this point it is the same as df_trees.  This will be replaced if a filter is applied
-        if "select_df" not in st.session_state:
+        # #Add select_df to session_state but at this point it is the same as df_trees.  This will be replaced if a filter is applied
+        # if "select_df" not in st.session_state:
 
-            st.session_state['select_df'] = []
+        #     st.session_state['select_df'] = []
 
-        st.session_state['select_df'] = df_trees
+        # st.session_state['select_df'] = df_trees
 
         df_trees.rename(columns = {'tree_name' : 'Tree Name', 'date' : 'Date', 'block' : 'Block ID', 'tree_number' : 'Tree Number', 
                                    'house_number' : 'House Number', 'street_code' : 'Street Code', 'species_code' : 'Species Code', 
@@ -644,15 +644,10 @@ def create_summary_data():
                     
         return df_trees
 
-    
-    # if 'df_trees' not in st.session_state:
-
-    #     st.session_state['df_trees'] = []
-
-    # st.session_state['df_trees'] = df_trees
-
-
+    # st.dataframe(df_trees, column_config={'defectColour': None}) 
+   
     # #Add select_df to session_state but at this point it is the same as df_trees.  This will be replaced if a filter is applied
+   
     # if "select_df" not in st.session_state:
 
     #     st.session_state['select_df'] = []
@@ -661,8 +656,7 @@ def create_summary_data():
     
     select_tree_count = df_trees.shape[0]
 
-    
-    
+     
     # with save_data_screen:
 
     #     screen1.write(df_trees.head(2))
@@ -753,9 +747,7 @@ if fileName is not None:
     st.session_state['select_tree_count'] = total_tree_count
 
 
-    screen1.markdown(f'''#### There are :red[{total_tree_count}] now loaded.  You can save this summary file by clicking on the button below, and/or proceed with the analyses in the sidebar to the left''')
-
-    
+    screen1.markdown(f'''#### There are :red[{total_tree_count}] now loaded.  You can save this summary file by clicking on the button below.  The saved file can then be loaded using the *Load an Existing Summary Worksheet* in the sidebar to the left''')
 
     st.dataframe(df_trees, column_config={'defectColour': None})
 
