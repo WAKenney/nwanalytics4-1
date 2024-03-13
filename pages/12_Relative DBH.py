@@ -27,7 +27,18 @@ def relativeDBH(data):
 
     with st.expander("Click here to read some comments about the DBH and Relative DBH analysis.", expanded=False):
     
-        st.markdown("""Simply looking at the distribution of diameters at breast height (DBH) fails to tell the whole story since the urban forest is usually
+        st.markdown("""
+                    The tree diameter at breat height (DBH) values were placed in four classes for easier comparison.  These classes are as follows: 
+                    
+            __Class I__ represents all trees with a DBH of 20 cm or less;
+            
+            __Class II__ all trees with a DBH >20 cm and <39 cm;
+
+            __Class III__ all trees with a DBH >40 cm and <59 cm; and
+
+            __Class IV__ all trees with a DBH 60 cm or more.
+
+            Simply looking at the distribution of DBH fails to tell the whole story since the urban forest is usually
             a mixture of species with large stature at maturity and those of small stature.  RDBH is derived by dividing each tree's DBH by the maximum DBH 
             for that species at maturity. We have derived the latter from the literature, municipal inventories and from our database of well over 150,000 trees collected 
             through Neighbour_woods_ inventories.
@@ -37,8 +48,8 @@ def relativeDBH(data):
             __RDBH Class II__ all trees with a DBH >25% or <50% of the maximum DBH for the species (Target 30%);
 
             __RDBH Class III__ all trees with a DBH >50% or <75% of the maximum DBH for the species (Target 20%); and
-
-            __RDBH Class IV__ all trees with a DBH 75% or more, of the maximum DBH for the species (Target 10%).
+                    
+            __RDBH Class IV__ all trees with a DBH 75% or more of the maximum DBH for the species (Target 10%).
 
             NOTE: This only includes trees that were identified to the species level and had a DBH recorded.  Not all species currently have a maximum DBH available.
 
