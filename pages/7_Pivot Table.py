@@ -39,7 +39,7 @@ def pivTable(ptab):
             c = ptForm.selectbox('Select the column for your table', options = ptab.columns)
         
         v = ptForm.selectbox('Select the value for your table', options = ptab.columns)
-        f = ptForm.selectbox('Select the value for your function', options = ['sum', 'mean', 'count' ])
+        f = ptForm.selectbox('Select the value for your function', options = ['sum', 'mean', 'median', 'count' ])
         
         ptForm.markdown('___')
 
@@ -48,7 +48,7 @@ def pivTable(ptab):
         showTotal = ptCol1.radio('Show column total?', ('Yes', 'No'))
         decimalNumber = ptCol2.number_input('Enter the number of decimal places for all values in table.', value  = 1)
 
-        if f != 'mean':
+        if f not in ['mean', 'median']:
 
             if showTotal =='Yes':
                 selectMargins=True
