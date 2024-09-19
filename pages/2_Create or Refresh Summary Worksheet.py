@@ -108,6 +108,9 @@ def create_summary_data():
 
     df_streets = get_streets()
 
+####
+    st.write(df_streets)
+####
     def clean_and_expand_data(df_trees):
 
        
