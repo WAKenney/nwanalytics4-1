@@ -16,7 +16,7 @@ titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
 title = 'nw4_splash_page.png'
 
 # Print the date and time of the last commit
-st.write("This app was last updated on October 10, 2024 at 3:00 pm pm")
+st.write("This app was last updated on October 10, 2024 at 3:00 pm")
 
 titleCol2.image(title)
 
