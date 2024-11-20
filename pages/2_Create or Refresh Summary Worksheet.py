@@ -21,7 +21,7 @@ titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
 
 title = 'new_nw_header.png'
 
-titleCol2.image(title, use_column_width=True)
+titleCol2.image(title, use_container_width=True)
 
 st.subheader('Create or Refresh a Neighbourwoods Summary File')
 
@@ -108,9 +108,7 @@ def create_summary_data():
 
     df_streets = get_streets()
 
-####
-    st.write(df_streets)
-####
+
     def clean_and_expand_data(df_trees):
 
        
@@ -600,7 +598,11 @@ def create_summary_data():
                                    'diversity_level' : 'category', 'dbh_class' : 'category', 
                                    'rdbh_class' : 'category', 'structural' : 'category', 
                                    'health' : 'category', 'defects' : 'category'})
-              
+
+
+        ##########  This is to test if block as a category causes parrow errors when block have mixed (string and numerical names)
+        df_trees['block'] = df_trees['block'].astype('string')
+        #############################################
         
         #Add df_trees to session_state
         if 'df_trees' not in st.session_state:
@@ -751,7 +753,7 @@ if fileName is not None:
 
     screen1.markdown(f'''#### There are :red[{total_tree_count}] now loaded.  You can save this summary file by clicking on the button below.  The saved file can then be loaded using the *Load an Existing Summary Worksheet* in the sidebar to the left''')
 
-    st.dataframe(df_trees, column_config={'defectColour': None})
+    # st.dataframe(df_trees, column_config={'defectColour': None})
 
     with screen2:
         save_data(df_trees)
