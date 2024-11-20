@@ -8,7 +8,7 @@ titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
 
 title = 'new_nw_header.png'
 
-titleCol2.image(title, use_column_width=True)
+titleCol2.image(title, use_container_width=True)
 
 st.subheader('Load an Existing Neighbourwoods Summary File')
 
@@ -127,7 +127,7 @@ if df_trees is not None:
 
     screen1 = st.empty()
     
-    st.dataframe(df_trees)
+    # st.dataframe(df_trees)
 
     #add df_trees to session_state
     st.session_state['df_trees'] = df_trees
