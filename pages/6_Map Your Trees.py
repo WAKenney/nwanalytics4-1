@@ -2,6 +2,7 @@ import folium
 from folium.plugins import Fullscreen
 import streamlit as st
 from streamlit_folium import folium_static
+from streamlit_folium import st_folium
 
 #Create page title
 titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
@@ -94,7 +95,8 @@ def mapItFolium(mapData):
 
     screen2.empty()
 
-    folium_static(treeMap)
+    # folium_static(treeMap)
+    st_folium(treeMap, width=725, returned_objects=[])
 
 if len(st.session_state['df_trees']) == 0:
 
