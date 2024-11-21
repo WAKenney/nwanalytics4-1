@@ -4,6 +4,7 @@ import streamlit as st
 # from datetime import datetime
 import git
 
+st.cache_resource.clear()
 st.cache_data.clear()
 
 currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
