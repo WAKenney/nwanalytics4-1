@@ -151,6 +151,10 @@ def create_summary_data():
             'diversity_level', 'origin', 'cpa', 'address', 'dbh_class', 'rdbh',
             'rdbh_class', 'structural', 'health', 'description', 'defects',
             'defectColour']
+        
+
+        #make sure lats and lons are stored as floats
+        df_trees = df_trees.astype({'latitude' : 'float', 'longitude' : 'float'}),
 
 
         def test_titles(df):
