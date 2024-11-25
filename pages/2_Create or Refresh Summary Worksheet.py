@@ -111,7 +111,6 @@ def create_summary_data():
 
 
     def clean_and_expand_data(df_trees):
-
        
         df_trees.rename(columns = {'Tree Name' : 'tree_name','Tree name' : 'tree_name', 
                                    'Date' : 'date', 'Block ID' : 'block', 'Block Id':'block', 'Block':'block',
@@ -136,7 +135,7 @@ def create_summary_data():
                                    'Longitude' : 'longitude', 'Latitude' : 'latitude'},
                                    inplace = True)
         
-        good_titles = ['tree_name', 'date', 'block', 'tree_number', 'house_number',
+        good_columns = ['tree_name', 'date', 'block', 'tree_number', 'house_number',
             'street_code', 'species_code', 'location_code', 'ownership_code',
             'number_of_stems', 'dbh', 'hard_surface', 'crown_width',
             'height_to_crown_base', 'total_height', 'reduced_crown',
@@ -153,31 +152,25 @@ def create_summary_data():
             'defectColour']
         
 
-        #make sure lats and lons are stored as floats
-        df_trees = df_trees.astype({'latitude' : 'float', 'longitude' : 'float'}),
-
-
-        def test_titles(df):
+        def test_titles(df_trees):
 
             st.markdown('#### Testing columns')
             
-            wrong_titles = [col for col in df.columns if col not in good_titles]
+            # Get the column names from your DataFrame
+            df_columns = df_trees.columns.tolist()
 
-            if len(wrong_titles) == 0:
+            # Convert both lists to sets
+            df_columns_set = set(df_columns)
+            good_columns_set = set(good_columns)
 
-                screen1.markdown("### All the necessary columns are present in the loaded data!")
+            # Find unauthorized columns
+            unauthorized_columns = df_columns_set - good_columns_set
 
-            screen1.dataframe(wrong_titles, column_config ={'value': st.column_config.Column(label = 'Incorrect Column Titles')})
-
-
-            missing_titles = [col for col in good_titles if col not in df.columns]
-
-            if len(missing_titles) == 0:
-
-                screen1.markdown("### There are no missing columns in the loaded data!")
-
-            screen1.dataframe(missing_titles, column_config ={'value': st.column_config.Column(label = 'Missing Column Titles')})
-
+            # Check if there are any unauthorized columns
+            if unauthorized_columns:
+                st.write("Unauthorized columns found:", list(unauthorized_columns))
+            else:
+                st.write("All columns are authorized.")
 
         test_titles(df_trees)
 
