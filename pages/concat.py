@@ -30,55 +30,54 @@ if file1_name is not None:
     file1 = pd.read_csv(file1_name)
 
     # Display the DataFrame
-    screen2.write("Here is your uploaded data:")
-    screen1.dataframe(file1)  # Streamlit interactive table
+    screen1.write("Here is your uploaded data:")
+    screen2.dataframe(file1)  # Streamlit interactive table
+
+
+    if file1_name is not None:
+        # File2 uploader
+        file2_name = screen3.file_uploader("Choose the CSV file to be merged with the first file", type=["csv"])
+
+        # Check if a file has been uploaded
+        if file2_name is not None:
+            # Read the CSV into a DataFrame
+            file2 = pd.read_csv(file2_name)
+
+            # Display the DataFrame
+            st.write("Here is your second uploaded data:")
+            st.dataframe(file2)  # Streamlit interactive table
+
+        if file2_name is not None:
+
+            st.header("Concatenated")
+            result = pd.concat([file1, file2])
+            st.dataframe(result)
+
+            st.header("Duplicates")
+            duplicates = result[result.duplicated(keep=False)]
+
+            st.dataframe(duplicates)
+
+
+        @st.cache_data
+        def save_result(result):  
+            return result.to_csv().encode("utf-8")
+
+        csv = save_result(result)
+
+        # Ask for filename input
+        default_filename = "merged_files.csv"
+        filename = st.text_input("Enter filename for CSV (including .csv)", value=default_filename)
+
+        st.download_button(
+            label=':floppy_disk: Click here to save your data on your local computer',
+            data=csv,
+            file_name=filename,
+            mime="text/csv",
+        )
+
+    else:
+        st.info("Please upload the CSV file to be merged with the first.")
 
 else:
     screen1.info("Please upload a CSV file in the box below.")
-
-if file1_name is not None:
-    # File2 uploader
-    file2_name = screen1.file_uploader("Choose the CSV file to be merged with the first file", type=["csv"])
-
-    # Check if a file has been uploaded
-    if file2_name is not None:
-        # Read the CSV into a DataFrame
-        file2 = pd.read_csv(file2_name)
-
-        # Display the DataFrame
-        st.write("Here is your second uploaded data:")
-        st.dataframe(file2)  # Streamlit interactive table
-
-else:
-    st.info("Please upload the CSV file to be merged with the first.")
-
-
-
-if file2_name is not None:
-
-    st.header("Concatenated")
-    result = pd.concat([file1, file2])
-    st.dataframe(result)
-
-    st.header("Duplicates")
-    duplicates = result[result.duplicated(keep=False)]
-
-    st.dataframe(duplicates)
-
-
-@st.cache_data
-def save_result(result):  
-    return result.to_csv().encode("utf-8")
-
-csv = save_result(result)
-
-# Ask for filename input
-default_filename = "merged_files.csv"
-filename = st.text_input("Enter filename for CSV (including .csv)", value=default_filename)
-
-st.download_button(
-    label=':floppy_disk: Click here to save your data on your local computer',
-    data=csv,
-    file_name=filename,
-    mime="text/csv",
-)
