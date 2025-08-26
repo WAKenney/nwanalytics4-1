@@ -2,39 +2,83 @@ import streamlit as st
 import pandas as pd
 
 
-# File upload for the first DataFrame
-st.subheader("Upload first CSV file")
-file1 = st.file_uploader("Choose a CSV file", key="file1")
-df1 = pd.read_csv(file1)
+#Create page title
+titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
 
-st.dataframe(df1)
+title = 'new_nw_header.png'
 
-# File upload for the second DataFrame
-st.subheader("Upload second CSV file")
-file2 = st.file_uploader("Choose a CSV file", key="file2")
-df2 = pd.read_csv(file2)
+titleCol2.image(title, use_container_width=True)
+# titleCol2.image(title, use_column_width=True)
 
-st.dataframe(df2)
+st.subheader('Merge (join) Two or More CSV Files')
 
-st.header("Concatenated")
-result = pd.concat([df1, df2])
-st.dataframe(result)
+st.markdown("___")
 
-st.header("Duplicates")
-duplicates = result[result.duplicated(keep=False)]
+screen1 = st.empty()
+screen2 = st.empty()
+screen3 = st.empty()
+screen4 = st.empty()
 
-st.dataframe(duplicates)
+# st.markdown("___")
+
+# File1 uploader
+file1_name = screen2.file_uploader("Choose a CSV file", type=["csv"])
+
+# Check if a file has been uploaded
+if file1_name is not None:
+    # Read the CSV into a DataFrame
+    file1 = pd.read_csv(file1_name)
+
+    # Display the DataFrame
+    screen2.write("Here is your uploaded data:")
+    screen1.dataframe(file1)  # Streamlit interactive table
+
+else:
+    screen1.info("Please upload a CSV file in the box below.")
+
+if file1_name is not None:
+    # File2 uploader
+    file2_name = screen1.file_uploader("Choose the CSV file to be merged with the first file", type=["csv"])
+
+    # Check if a file has been uploaded
+    if file2_name is not None:
+        # Read the CSV into a DataFrame
+        file2 = pd.read_csv(file2_name)
+
+        # Display the DataFrame
+        st.write("Here is your second uploaded data:")
+        st.dataframe(file2)  # Streamlit interactive table
+
+else:
+    st.info("Please upload the CSV file to be merged with the first.")
+
+
+
+if file2_name is not None:
+
+    st.header("Concatenated")
+    result = pd.concat([file1, file2])
+    st.dataframe(result)
+
+    st.header("Duplicates")
+    duplicates = result[result.duplicated(keep=False)]
+
+    st.dataframe(duplicates)
 
 
 @st.cache_data
-def convert_result(result):  
+def save_result(result):  
     return result.to_csv().encode("utf-8")
 
-csv = convert_result(result)
+csv = save_result(result)
+
+# Ask for filename input
+default_filename = "merged_files.csv"
+filename = st.text_input("Enter filename for CSV (including .csv)", value=default_filename)
 
 st.download_button(
-    label="Download data as CSV",
+    label=':floppy_disk: Click here to save your data on your local computer',
     data=csv,
-    file_name="large_df.csv",
+    file_name=filename,
     mime="text/csv",
 )
