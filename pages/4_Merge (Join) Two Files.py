@@ -14,12 +14,15 @@ st.subheader('Merge (join) Two or More CSV Files')
 
 st.markdown("___")
 
+message_screen = st.empty()
+st.markdown("___")
+
 screen1 = st.empty()
 screen2 = st.empty()
 screen3 = st.empty()
 screen4 = st.empty()
 
-# st.markdown("___")
+message_screen.write("Hi there")
 
 # File1 uploader
 file1_name = screen2.file_uploader("Choose a CSV file", type=["csv"])
@@ -32,6 +35,8 @@ if file1_name is not None:
     # Display the DataFrame
     screen1.write("Here is your uploaded data:")
     screen2.dataframe(file1)  # Streamlit interactive table
+
+    message_screen.write("Now scroll down and select a csv file to merge with the one ou just selected.")
 
 
     if file1_name is not None:
@@ -53,11 +58,11 @@ if file1_name is not None:
             result = pd.concat([file1, file2])
             st.dataframe(result)
 
-            st.header("Duplicates")
             duplicates = result[result.duplicated(keep=False)]
 
-            st.dataframe(duplicates)
-
+            if not duplicates.empty:
+                st.header("Duplicates")
+                st.dataframe(duplicates)
 
         @st.cache_data
         def save_result(result):  
