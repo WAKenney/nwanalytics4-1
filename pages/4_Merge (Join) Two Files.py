@@ -64,15 +64,29 @@ if file1_name is not None:
                 st.header("Duplicates")
                 st.dataframe(duplicates)
 
+            
+            st.markdown("___")
+
+            left, right = st.columns(2)
+
+            if left.button("Click here to merge another file"):
+                left.markdown("You clicked the plain button.")
+            
+            
+            if right.button("Click here to save the merged file to your computer"):
+                right.markdown("You clicked the Material button.")
+
         @st.cache_data
         def save_result(result):  
             return result.to_csv().encode("utf-8")
+        
 
         csv = save_result(result)
 
         # Ask for filename input
-        default_filename = "merged_files.csv"
-        filename = st.text_input("Enter filename for CSV (including .csv)", value=default_filename)
+        # default_filename = "merged_files.csv"
+
+        filename = st.text_input("Enter filename for CSV (including .csv)")
 
         st.download_button(
             label=':floppy_disk: Click here to save your data on your local computer',
