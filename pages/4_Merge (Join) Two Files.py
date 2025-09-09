@@ -4,7 +4,26 @@ import io
 
 st.set_page_config(page_title="Merge CSV Files", layout="centered")
 
-st.title("📂 Merge CSV Files")
+#Create page title
+titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
+
+title = 'new_nw_header.png'
+
+titleCol2.image(title, use_container_width=True)
+
+st.header('📂 Merge (join) Two or More CSV Files')
+
+st.markdown("___")
+
+message_screen = st.empty()
+st.markdown("___")
+
+screen1 = st.empty()
+screen2 = st.empty()
+screen3 = st.empty()
+screen4 = st.empty()
+screen5 = st.empty()
+# screen6 = st.empty()
 
 # --- Session State Initialization ---
 if "file1" not in st.session_state:
