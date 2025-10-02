@@ -119,7 +119,8 @@ if st.session_state.dataframes:
                 file_name="concatenated.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-            st.warning("Reminder: The combined data workbook MUST include a worksheet called 'streets' if it is to be used with NWAnalytics.")
+            st.markdown("""#### Reminder: The combined data workbook MUST include a worksheet called 'streets' if it is to be used with NWAnalytics.  The saved file has a 'streets' worksheet added but, you will have to add the necessary data in the 'street_code' and 'street_name' columns.
+                        """)
     else:
         concat_df = pd.concat(st.session_state.dataframes, ignore_index=True)
         st.subheader("Preview of Concatenated Data:")
@@ -133,13 +134,13 @@ if st.session_state.dataframes:
         excel_bytes = excel_buffer.getvalue()
 
         st.download_button(
-            label="Download Concatenated Excel (with trees & streets sheets)",
+            label="**Click here to download the combined file as an Excel file (with trees & streets sheets)** 📁",
             data=excel_bytes,
             file_name="concatenated.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
-        st.warning("Reminder: The combined data workbook MUST include a worksheet called 'streets' if it is to be used with NWAnalytics.")
-
+        st.markdown("""#### Reminder: The combined data workbook MUST include a worksheet called 'streets' if it is to be used with NWAnalytics.  The saved file has a 'streets' worksheet added but, you will have to add the necessary data in the 'street_code' and 'street_name' columns.
+                        """)
 
 
 
