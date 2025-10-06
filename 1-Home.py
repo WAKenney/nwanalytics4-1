@@ -2,6 +2,8 @@ import pandas as pd
 import streamlit as st
 import git
 
+st.set_page_config(page_title="NWAnalytis 4-1")
+
 st.cache_resource.clear()
 st.cache_data.clear()
 
