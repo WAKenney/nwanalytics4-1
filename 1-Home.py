@@ -73,8 +73,6 @@ def getSpeciesTable():
 
     speciesTable = pd.read_excel(speciesFile,sheet_name = "species")
 
-    # st.dataframe(speciesTable)
-
     if "speciesTable" not in st.session_state:
 
         st.session_state['speciesTable'] = []
