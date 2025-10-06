@@ -97,7 +97,7 @@ if st.session_state.dataframes:
             st.stop()
         if proceed:
             concat_df = pd.concat(st.session_state.dataframes, ignore_index=True)
-            st.subheader("Preview of Concatenated Data:")
+            st.subheader("Preview of Combined Data:")
             st.dataframe(concat_df)
 
             # Excel writer with 'trees' and 'streets'
@@ -108,7 +108,7 @@ if st.session_state.dataframes:
             excel_bytes = excel_buffer.getvalue()
 
             st.download_button(
-                label="Download Concatenated Excel (with trees & streets sheets)",
+                label="Download Combined data as an Excel Workbook (with trees & streets sheets)",
                 data=excel_bytes,
                 file_name="concatenated.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -117,7 +117,7 @@ if st.session_state.dataframes:
                         """)
     else:
         concat_df = pd.concat(st.session_state.dataframes, ignore_index=True)
-        st.subheader("Preview of Concatenated Data:")
+        st.subheader("Preview of Combined Data:")
         st.dataframe(concat_df)
 
         # Excel writer with 'trees' and 'streets'
