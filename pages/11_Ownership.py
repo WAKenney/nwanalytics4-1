@@ -42,7 +42,7 @@ def ownership(data):
 
     ownershipData = data.loc[: , ['ownership_code', 'tree_name']]
 
-    ownershipData.fillna('not assessed')
+    # ownershipData.fillna('not assessed')
 
     ownershipPT = pd.pivot_table(ownershipData, index='ownership_code', aggfunc='count')
     ownershipPT.reset_index(inplace=True)
