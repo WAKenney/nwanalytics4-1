@@ -183,7 +183,15 @@ def create_summary_data():
         #                                }, inplace = True)
 
         if 'xy' in dataCols:
-            df_trees[['Latitude', 'Longitude']] = df_trees['xy'].str.split(',', 1, expand=True)
+
+            # Split the 'xy' column into two new columns
+            df_trees[['latitude', 'longitude']] = df_trees['xy'].str.split(',', expand=True)
+
+            # Convert the new columns to float
+            df_trees['latitude'] = df_trees['latitude'].astype(float)
+            df_trees['longitude'] = df_trees['longitude'].astype(float)
+
+            # Drop the original 'XY' column
             df_trees.drop('xy', axis=1, inplace=True)
 
         #check to make sure Lat and Lon aren't mixed up.  If average Latitude is greater than 60 it is LIKELY really longitude so swap the names
