@@ -9,7 +9,7 @@ st.cache_data.clear()
 
 currentDir = "https://raw.githubusercontent.com/WAKenney/NWAnalytics/master/"
 
-speciesFile = 'NWspecies120324.xlsx'
+speciesFile = 'NWspecies301025.xlsx'
 
 #Create page title
 titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
@@ -17,7 +17,7 @@ titleCol1, titleCol2, titleCol3 =st.columns((1,4,1))
 title = 'nw4_splash_page.png'
 
 # Print the date and time of the last commit
-st.write("This app was last updated on October 26, 2025 at 11:45 am")
+st.write("This app was last updated on October 30, 2025 at 10:25 am")
 
 titleCol2.image(title)
 
